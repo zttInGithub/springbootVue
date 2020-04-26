@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ztt.test.entity.User;
 import com.ztt.test.service.SpringJdbcService;
+import org.springframework.web.bind.annotation.RestController;
 
-@Component
+//@Component
+@RestController
 @RequestMapping("/users")
 public class SpringJdbcController {
 	
@@ -19,6 +21,7 @@ public class SpringJdbcController {
 	
 	@GetMapping
 	public List<User> queryUsers(){
+		System.out.println(springJdbcServiceImpl.queryUsers().toString());
 		return springJdbcServiceImpl.queryUsers();
 	}
 }

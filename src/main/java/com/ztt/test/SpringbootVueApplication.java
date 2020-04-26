@@ -18,11 +18,11 @@ public class SpringbootVueApplication {
 		SpringApplication.run(SpringbootVueApplication.class, args);
 	}
 	
-	@GetMapping("/demo1")
-	public String demo1() {
-		return "testztt";
-	}
-	
+//	@GetMapping("/demo1")
+//	public String demo1() {
+//		return "testztt";
+//	}
+
 //	@Bean
 //	public CommandLineRunner commandLineRuuner(ApplicationContext ctx) {
 //		return args -> {

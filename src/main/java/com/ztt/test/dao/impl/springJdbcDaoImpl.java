@@ -19,7 +19,7 @@ public class springJdbcDaoImpl implements springJdbcDao {
 	}
 	@Override
 	public List<User> queryUsers() {
-		String sql = "select u.* from t_user";
+		String sql = "select u.* from t_user u";
 		return JdbcTemplate.query(sql, new Object[] {}, new BeanPropertyRowMapper<>(User.class));
 	}
 

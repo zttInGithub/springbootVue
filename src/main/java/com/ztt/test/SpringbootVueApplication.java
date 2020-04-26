@@ -23,14 +23,14 @@ public class SpringbootVueApplication {
 		return "testztt";
 	}
 	
-	@Bean
-	public CommandLineRunner commandLineRuuner(ApplicationContext ctx) {
-		return args -> {
-			System.out.println("spring默认提供的bean");
-			String[] beanNames = ctx.getBeanDefinitionNames();
-			Arrays.sort(beanNames);
-			Arrays.stream(beanNames).forEach(System.out::println);
-		};
-	}
+//	@Bean
+//	public CommandLineRunner commandLineRuuner(ApplicationContext ctx) {
+//		return args -> {
+//			System.out.println("spring默认提供的bean");
+//			String[] beanNames = ctx.getBeanDefinitionNames();
+//			Arrays.sort(beanNames);
+//			Arrays.stream(beanNames).forEach(System.out::println);
+//		};
+//	}
 
 }

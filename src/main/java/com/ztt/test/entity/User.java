@@ -1,9 +1,13 @@
 package com.ztt.test.entity;
 
+import java.io.Serializable;
+
 import org.springframework.stereotype.Component;
 
 @Component
-public class User {
+public class User implements Serializable{
+	
+	private static final long serialVersionUID = 8655851615465363471L;
 	private Long id;
 	private String username;
 	private String password;
@@ -29,5 +33,19 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + "]";
 	}
+	public User(Long id, String username, String password) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+	}
 	
+	public User(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+	public User() {
+		super();
+	}
 }

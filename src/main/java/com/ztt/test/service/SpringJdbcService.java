@@ -11,4 +11,12 @@ public interface SpringJdbcService {
 	 * */
 	List<User> queryUsers();
 
+	User getUser(Long id);
+
+	int delUser(Long id);
+
+	int addUser(User user);
+
+	int editUser(Long id, User user);
+
 }

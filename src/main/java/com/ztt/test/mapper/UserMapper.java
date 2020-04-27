@@ -2,11 +2,13 @@ package com.ztt.test.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.ztt.test.entity.User;
 
+@Mapper
 public interface UserMapper {
 	
 //	 t_user 操作：演示两种方式

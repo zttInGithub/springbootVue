@@ -47,12 +47,12 @@ public class SpringbootVueApplicationTests {
 
     @Test
     public void test3() throws Exception {
-     //   final int row1 = userMapper.insert(new User("u1", "p1"));
-     //   log.info("[添加结果] - [{}]", row1);
-     //   final int row2 = userMapper.insert(new User("u2", "p2"));
-     //   log.info("[添加结果] - [{}]", row2);
-      //s  final int row3 = userMapper.insert(new User("u1", "p3"));
-      //  log.info("[添加结果] - [{}]", row3);
+        final int row1 = userMapper.insert(new User("u1", "p1"));
+        log.info("[添加结果] - [{}]", row1);
+        final int row2 = userMapper.insert(new User("u2", "p2"));
+        log.info("[添加结果] - [{}]", row2);
+        final int row3 = userMapper.insert(new User("u1", "p3"));
+        log.info("[添加结果] - [{}]", row3);
         final List<User> u1 = userMapper.findByUsername("ztt");
         log.info("[根据用户名查询] - [{}]", u1);
     }

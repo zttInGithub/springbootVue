@@ -16,4 +16,5 @@ public interface SpringJdbcDao {
 
 	int edit(Long id, User user);
 
+	
 }

@@ -68,6 +68,16 @@
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
 		</dependency>
+		<!-- redis -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<!-- 连接池 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-pool2</artifactId>
+		</dependency>
 		<!-- 默认就内嵌了Tomcat 容器，如需要更换容器也极其简单-->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>

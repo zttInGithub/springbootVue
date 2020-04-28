@@ -5,5 +5,9 @@
   <insert id="insert" parameterType="com.ztt.test.entity.User">
      INSERT INTO `t_user`(`username`,`password`) VALUES (#{username},#{password})
   </insert>
+  
+  <update id="update" parameterType="com.ztt.test.entity.User">
+     update  `t_user` set `username` = #{username}, `password` = #{password} where id = #{id}
+  </update>
 
 </mapper>

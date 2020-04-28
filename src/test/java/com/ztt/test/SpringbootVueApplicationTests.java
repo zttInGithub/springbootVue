@@ -2,7 +2,11 @@ package com.ztt.test;
 
 
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.stream.IntStream;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,14 +21,21 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ztt.test.dao.RoleRepository;
+import com.ztt.test.entity.Menu;
 import com.ztt.test.entity.Role;
 import com.ztt.test.entity.User;
+import com.ztt.test.mapper.MenuMapper;
 import com.ztt.test.mapper.UserMapper;
+import com.ztt.test.service.UserService;
 
 
 @RunWith(SpringRunner.class)
@@ -44,7 +55,97 @@ public class SpringbootVueApplicationTests {
 
 	@Autowired
     private UserMapper userMapper;
+	
+	@Autowired
+	private MenuMapper menuMapper;
+	
+	@Autowired
+	private UserService userService;
 
+	@Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
+    @Autowired
+    private RedisTemplate<String, Serializable> redisCacheTemplate;
+
+    /**
+     * cache-redis
+     */
+    @Test
+    public void test6() {
+        final int user = userService.saveOrUpdate(new User(7L, "u5", "p5"));
+        try {
+        	log.info("[saveOrUpdate] - [{}]", user);
+            final User user1 = userService.get(7L);
+            log.info("[get] - [{}]", user1);
+            userService.delete(7L);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+    /**
+     * Lettuce Redis
+     */
+    @Test
+    public void test5() {
+        // TODO 测试线程安全
+        ExecutorService executorService = Executors.newFixedThreadPool(1000);
+        //opsForValue--->https://blog.csdn.net/qq_25135655/article/details/80357137
+        IntStream.range(0, 1000).forEach(i ->
+                executorService.execute(() -> stringRedisTemplate.opsForValue().increment("kk", 1))
+        );
+        stringRedisTemplate.opsForValue().set("k1", "v1");
+        final String k1 = stringRedisTemplate.opsForValue().get("k1");
+        log.info("[字符缓存结果] - [{}]", k1);
+        // TODO 以下只演示整合，具体Redis命令可以参考官方文档，Spring Data Redis 只是改了个名字而已，Redis支持的命令它都支持
+        String key = "ztt:user:1";
+        redisCacheTemplate.opsForValue().set(key, new User(1L, "u1", "pa"));
+        // TODO 对应 String（字符串）
+        final User user = (User) redisCacheTemplate.opsForValue().get(key);
+        log.info("[对象缓存结果] - [{}]", user);
+    }
+    
+    /**
+     * mybatis分页
+     * @throws Exception
+     */
+	@Test
+    public void test4() throws Exception {
+        final Menu menu1 = new Menu("u1", "p1");
+        final Menu menu2 = new Menu("u1", "p2");
+        final Menu menu3 = new Menu("u3", "p3");
+        //menuMapper.insertSelective(menu1);
+        log.info("[menu1回写主键] - [{}]", menu1.getId());
+      //  menuMapper.insertSelective(menu2);
+        log.info("[menu2回写主键] - [{}]", menu2.getId());
+      //  menuMapper.insertSelective(menu3);
+        log.info("[menu3回写主键] - [{}]", menu3.getId());
+        final int count = menuMapper.countByUsername("u1");
+        log.info("[调用自己写的SQL] - [{}]", count);
+
+        // TODO 模拟分页
+        menuMapper.insertSelective(new Menu("u1", "p1"));
+        menuMapper.insertSelective(new Menu("u2", "p2"));
+        menuMapper.insertSelective(new Menu("u3", "p3"));
+        menuMapper.insertSelective(new Menu("u4", "p4"));
+        menuMapper.insertSelective(new Menu("u5", "p5"));
+        menuMapper.insertSelective(new Menu("u6", "p6"));
+        menuMapper.insertSelective(new Menu("u7", "p7"));
+        menuMapper.insertSelective(new Menu("u8", "p8"));
+        menuMapper.insertSelective(new Menu("u9", "p9"));
+        menuMapper.insertSelective(new Menu("u10", "p10"));
+        // TODO 分页 + 排序 this.menuMapper.selectAll() 这一句就是我们需要写的查询，有了这两款插件无缝切换各种数据库
+        final PageInfo<Object> pageInfo = PageHelper.startPage(1, 10).setOrderBy("id desc").doSelectPageInfo(() -> this.menuMapper.selectAll());
+        log.info("[lambda写法] - [分页信息] - [{}]", pageInfo.toString());
+
+        PageHelper.startPage(1, 10).setOrderBy("id desc");
+        final PageInfo<Menu> menuPageInfo = new PageInfo<>(this.menuMapper.selectAll());
+        log.info("[普通写法] - [{}]", menuPageInfo);
+    }
+	
+	/**
+	 * mybtis
+	 * */
     @Test
     public void test3() throws Exception {
         final int row1 = userMapper.insert(new User("u1", "p1"));

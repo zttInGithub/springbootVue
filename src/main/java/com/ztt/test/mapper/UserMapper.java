@@ -17,5 +17,13 @@ public interface UserMapper {
 	@Select("select * from t_user where username = #{username}")
 	List<User> findByUsername(@Param("username") String username);
 	
+	@Select("select * from t_user where id = #{id}")
+	User findByUserId(@Param("id") Long id);
+	
+	@Select("delete from t_user where id = #{id}")
+	int deleteByUserId(@Param("id") Long id);
+	
+	int update(User user);
+	
 	int insert(User user);
 }

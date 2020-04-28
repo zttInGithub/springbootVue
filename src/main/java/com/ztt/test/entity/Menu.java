@@ -2,11 +2,16 @@ package com.ztt.test.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "t_menu")
 public class Menu implements Serializable{
 	private static final long serialVersionUID = 8655851615465363473L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	private Long id;
 	private String menuName;
 	private String menuPath;
@@ -35,6 +40,11 @@ public class Menu implements Serializable{
 	public Menu(Long id, String menuName, String menuPath) {
 		super();
 		this.id = id;
+		this.menuName = menuName;
+		this.menuPath = menuPath;
+	}
+	public Menu(String menuName, String menuPath) {
+		super();
 		this.menuName = menuName;
 		this.menuPath = menuPath;
 	}

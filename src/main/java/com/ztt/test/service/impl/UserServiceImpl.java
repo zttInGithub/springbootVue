@@ -22,9 +22,10 @@ public class UserServiceImpl implements UserService{
 	
 	@CachePut(value = "user", key = "#user.id")
 	@Override
-	public int saveOrUpdate(User user) {
+	public User saveOrUpdate(User user) {
 		log.info("进入 saveOrUpdate 方法");
-		return userMapper.insert(user);
+		userMapper.saveOrUpdate(user);
+		return  user;
 	}
 
 	@Cacheable(value = "user", key = "#id")
@@ -41,11 +42,4 @@ public class UserServiceImpl implements UserService{
 		userMapper.deleteByUserId(id);
 	}
 	
-	@CacheEvict(value = "user", key = "#id")
-	@Override
-	public int update(User user) {
-		log.info("进入 update 方法");
-		return userMapper.update(user);
-	}
-
 }

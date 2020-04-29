@@ -68,17 +68,22 @@ public class SpringbootVueApplicationTests {
     @Autowired
     private RedisTemplate<String, Serializable> redisCacheTemplate;
 
+    
+    
+    
+    
+    
     /**
-     * cache-redis
+     * spring cache-redis
      */
     @Test
     public void test6() {
-        final int user = userService.saveOrUpdate(new User(7L, "u5", "p5"));
         try {
+        	final User user = userService.saveOrUpdate(new User(8L, "u5", "p5"));
         	log.info("[saveOrUpdate] - [{}]", user);
-            final User user1 = userService.get(7L);
+            final User user1 = userService.get(8L);
             log.info("[get] - [{}]", user1);
-            userService.delete(7L);
+            userService.delete(8L);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

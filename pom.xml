@@ -95,6 +95,12 @@
 		    <artifactId>pagehelper-spring-boot-starter</artifactId>
 		    <version>1.2.5</version>
 		</dependency>
+		<!-- API工具-swagger -->
+		<dependency>
+		    <groupId>com.battcn</groupId>
+		    <artifactId>swagger-spring-boot-starter</artifactId>
+		    <version>1.4.5-RELEASE</version>
+		</dependency>
 		
 	</dependencies>
 

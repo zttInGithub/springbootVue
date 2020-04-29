@@ -2,6 +2,7 @@ package com.ztt.test.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -20,10 +21,10 @@ public interface UserMapper {
 	@Select("select * from t_user where id = #{id}")
 	User findByUserId(@Param("id") Long id);
 	
-	@Select("delete from t_user where id = #{id}")
+	@Delete("delete from t_user where id = #{id}") 
 	int deleteByUserId(@Param("id") Long id);
 	
-	int update(User user);
+	Integer saveOrUpdate(User user);
 	
-	int insert(User user);
+	Integer insert(User user);
 }

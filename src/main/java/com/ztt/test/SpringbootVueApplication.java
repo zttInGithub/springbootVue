@@ -6,11 +6,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.battcn.swagger.annotation.EnableSwagger2Doc;
+
 @RestController
 @SpringBootApplication
 @EnableCaching
+@EnableSwagger2Doc
 public class SpringbootVueApplication {
-
+//http://localhost:8080/dev/swagger-ui.html
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootVueApplication.class, args);
 	}

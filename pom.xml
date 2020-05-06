@@ -101,7 +101,17 @@
 		    <artifactId>swagger-spring-boot-starter</artifactId>
 		    <version>1.4.5-RELEASE</version>
 		</dependency>
-		
+		<!-- rabbitmq -->
+		<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-amqp</artifactId>
+	    </dependency>
+	    <!-- fastjson -->
+	    <dependency>
+	        <groupId>com.alibaba</groupId>
+	        <artifactId>fastjson</artifactId>
+	        <version>1.2.46</version>
+	    </dependency>
 	</dependencies>
 
 	<build>

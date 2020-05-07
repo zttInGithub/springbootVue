@@ -17,12 +17,12 @@ import com.ztt.test.entity.Book;
  *
  */
 
-@Component
+//@Component
 public class BookHandler {
 	
 	private static Logger log = LoggerFactory.getLogger(BookHandler.class);
 	
-	@RabbitListener(queues = {RabbitConfig.DEFAULT_BOOK_QUEUE})
+	//@RabbitListener(queues = {RabbitConfig.DEFAULT_BOOK_QUEUE})
 	public void listenerAutoAck(Book book, Message message, Channel channel) {
 		// TODO 如果手动ACK,消息会被监听消费,但是消息在队列中依旧存在,如果 未配置 acknowledge-mode 默认是会在消费完毕后自动ACK掉
 		final long deliveryTag = message.getMessageProperties().getDeliveryTag();
@@ -38,7 +38,7 @@ public class BookHandler {
 			}
 		}
 	}
-	@RabbitListener(queues = {RabbitConfig.MANUAL_BOOK_QUEUE})
+	//@RabbitListener(queues = {RabbitConfig.MANUAL_BOOK_QUEUE})
     public void listenerManualAck(Book book, Message message, Channel channel) {
         log.info("[listenerManualAck 监听的消息] - [{}]", book.toString());
         try {
@@ -49,7 +49,7 @@ public class BookHandler {
         }
     }
 	
-	@RabbitListener(queues = {RabbitConfig.REGISTER_QUEUE_NAME})
+	//@RabbitListener(queues = {RabbitConfig.REGISTER_QUEUE_NAME})
     public void listenerDelayQueue(Book book, Message message, Channel channel) {
         log.info("[listenerDelayQueue 监听的消息] - [消费时间] - [{}] - [{}]", LocalDateTime.now(), book.toString());
         try {

@@ -8,10 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.battcn.swagger.annotation.EnableSwagger2Doc;
 
+import de.codecentric.boot.admin.server.config.EnableAdminServer;
+
+
 @RestController
 @SpringBootApplication
 @EnableCaching
 @EnableSwagger2Doc
+@EnableAdminServer
 public class SpringbootVueApplication {
 //http://localhost:8080/dev/swagger-ui.html
 	public static void main(String[] args) {

@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
  * rabbitMq配置
  * 
  */
-@Configuration
+//@Configuration
 public class RabbitConfig {
 	
 	private static final Logger log = LoggerFactory.getLogger(RabbitConfig.class);

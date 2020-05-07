@@ -15,7 +15,7 @@ import de.codecentric.boot.admin.server.config.EnableAdminServer;
 @SpringBootApplication
 @EnableCaching
 @EnableSwagger2Doc
-@EnableAdminServer
+//@EnableAdminServer
 public class SpringbootVueApplication {
 //http://localhost:8080/dev/swagger-ui.html
 	public static void main(String[] args) {

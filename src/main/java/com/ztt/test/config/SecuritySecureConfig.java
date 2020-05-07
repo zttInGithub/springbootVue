@@ -13,7 +13,7 @@ import de.codecentric.boot.admin.server.config.AdminServerProperties;
 /**
  * prod 环境加载
  */
-@Profile("prod")
+/*@Profile("prod")
 @Configuration
 public class SecuritySecureConfig extends WebSecurityConfigurerAdapter {
     private final String adminContextPath;
@@ -37,4 +37,4 @@ public class SecuritySecureConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic().and()
                 .csrf().disable();
     }
-}
+}*/

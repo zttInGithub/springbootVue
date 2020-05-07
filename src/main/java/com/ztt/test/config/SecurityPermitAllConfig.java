@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 /**
  * dev 环境加载
  */
-@Profile("dev")
+/*@Profile("dev")
 @Configuration
 public class SecurityPermitAllConfig extends WebSecurityConfigurerAdapter{
 	@Override
@@ -16,4 +16,4 @@ public class SecurityPermitAllConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().anyRequest().permitAll()
 			.and().csrf().disable();
 	}
-}
+}*/

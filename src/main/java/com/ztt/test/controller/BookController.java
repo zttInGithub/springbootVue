@@ -9,8 +9,10 @@ import org.springframework.amqp.support.converter.AbstractJavaTypeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ztt.test.annotation.LocalLock;
 import com.ztt.test.config.RabbitConfig;
 import com.ztt.test.entity.Book;
 
@@ -26,6 +28,14 @@ public class BookController {
 	public BookController(RabbitTemplate rabbitTemplate) {
 		this.rabbitTemplate = rabbitTemplate;
 	}
+	
+	
+	@LocalLock(key = "book:arg[0]")
+    @GetMapping("/book3")
+    public String query(@RequestParam String token) {
+        return "success - " + token;
+    }
+	
 	
 	@GetMapping
 	public void defaultMessage() {

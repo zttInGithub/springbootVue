@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.ztt.test.entity.ErrorResponseEntity;
 import com.ztt.test.exception.CustomException;
 
-@RestControllerAdvice
+//@RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 	/**
      * 定义要捕获的异常 可以多个 @ExceptionHandler({})
